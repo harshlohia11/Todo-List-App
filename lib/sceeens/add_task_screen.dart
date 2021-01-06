@@ -36,8 +36,11 @@ class AddTaskScreen extends StatelessWidget {
             FlatButton(
               color: Colors.lightBlueAccent,
               onPressed: () {
-                Provider.of<TaskData>(context, listen: false)
-                    .addTask(newtasktitle);
+                if (newtasktitle != null) {
+                  Provider.of<TaskData>(context, listen: false)
+                      .addTask(newtasktitle);
+                }
+
                 Navigator.pop(context);
               },
               child: Text(

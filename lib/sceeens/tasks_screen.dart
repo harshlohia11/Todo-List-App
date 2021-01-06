@@ -36,14 +36,25 @@ class TasksScreen extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
-                CircleAvatar(
-                  child: Icon(
-                    Icons.list,
-                    size: 30.0,
-                    color: Colors.lightBlueAccent,
-                  ),
-                  backgroundColor: Colors.white,
-                  radius: 30.0,
+                Row(
+                  children: [
+                    CircleAvatar(
+                      child: Icon(
+                        Icons.list,
+                        size: 30.0,
+                        color: Colors.lightBlueAccent,
+                      ),
+                      backgroundColor: Colors.white,
+                      radius: 30.0,
+                    ),
+                    SizedBox(width: 100.0),
+                    IconButton(
+                        onPressed: () {
+                          Provider.of<TaskData>(context, listen: false)
+                              .deleteall();
+                        },
+                        icon: Icon(Icons.delete))
+                  ],
                 ),
                 SizedBox(height: 10.0),
                 Text(

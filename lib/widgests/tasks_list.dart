@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:your_todos/widgests/tasks_tile.dart';
-import 'package:your_todos/models/tasks.dart';
 import 'package:provider/provider.dart';
 import 'package:your_todos/models/task_data.dart';
 
@@ -18,7 +17,35 @@ class TasksList extends StatelessWidget {
                 taskdata.updatetask(taskdata.tasks[index]);
               },
               longpresscallback: () {
-                taskdata.removetask(taskdata.tasks[index]);
+                showDialog(
+                  context: context,
+                  builder: (BuildContext context) {
+                    // return object of type Dialog
+                    return AlertDialog(
+                      title: new Text(
+                          "Are you sure you want to delete this task?"),
+                      actions: <Widget>[
+                        // usually buttons at the bottom of the dialog
+                        Row(
+                          children: <Widget>[
+                            new FlatButton(
+                              child: new Text("No"),
+                              onPressed: () {
+                                Navigator.of(context).pop();
+                              },
+                            ),
+                            new FlatButton(
+                                onPressed: () {
+                                  taskdata.removetask(taskdata.tasks[index]);
+                                  Navigator.of(context).pop();
+                                },
+                                child: new Text("Yes"))
+                          ],
+                        ),
+                      ],
+                    );
+                  },
+                );
               },
             );
           },
@@ -28,3 +55,4 @@ class TasksList extends StatelessWidget {
     );
   }
 }
+//taskdata.removetask(taskdata.tasks[index]);
